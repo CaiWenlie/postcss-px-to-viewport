@@ -25,7 +25,7 @@ var defaults = {
 var ignoreNextComment = 'px-to-viewport-ignore-next';
 var ignorePrevComment = 'px-to-viewport-ignore';
 
-module.exports = postcss.plugin('postcss-px-to-viewport', function (options) {
+module.exports = options => {
   var opts = objectAssign({}, defaults, options);
 
   checkRegExpOrArray(opts, 'exclude');
@@ -142,7 +142,9 @@ module.exports = postcss.plugin('postcss-px-to-viewport', function (options) {
       css.append(landscapeRoot);
     }
   };
-});
+};
+
+module.exports.postcss = true;
 
 function getUnit(prop, opts) {
   return prop.indexOf('font') === -1 ? opts.viewportUnit : opts.fontViewportUnit;
